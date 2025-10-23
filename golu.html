@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Sorry ga chickammaguuuuuu ❤️</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&family=Great+Vibes&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg: linear-gradient(135deg,#ffe6f0 0%, #fff4e6 50%, #e6f7ff 100%);
+      --card:#ffffffcc;
+      --accent:#ff6b8a;
+      --muted:#6b6b6b;
+    }
+    *{box-sizing:border-box;transition:all .3s ease}
+    body{min-height:100vh;display:flex;align-items:center;justify-content:center;margin:0;padding:20px;background:var(--bg);font-family:'Poppins',sans-serif;overflow-x:hidden;}
+
+    .card{
+      width:100%;max-width:860px;background:var(--card);border-radius:25px;box-shadow:0 12px 30px rgba(15,15,15,0.12);overflow:hidden;display:grid;grid-template-columns:1fr 420px;align-items:stretch;backdrop-filter:blur(10px);
+    }
+
+    .left{padding:40px 35px;position:relative;}
+    .right{background:linear-gradient(180deg,#fff 0%, #fff0f8 100%);display:flex;align-items:center;justify-content:center;padding:20px;position:relative;}
+
+    h1{margin:0;font-size:34px;color:#333;text-shadow:1px 1px 3px rgba(0,0,0,0.1)}
+    .cursive{font-family:'Great Vibes',cursive;color:var(--accent);font-size:40px}
+    p{color:var(--muted);line-height:1.7;margin-top:14px;font-size:15px}
+
+    .message{
+      margin-top:18px;padding:20px;border-radius:16px;background:rgba(255,107,138,0.06);border:1px solid rgba(255,107,138,0.08)
+    }
+
+    .controls{display:flex;gap:12px;margin-top:18px;flex-wrap:wrap}
+    .btn{padding:11px 18px;border-radius:10px;border:0;cursor:pointer;font-weight:600;letter-spacing:.3px;box-shadow:0 2px 6px rgba(0,0,0,0.1)}
+    .btn--pink{background:linear-gradient(90deg,#ff8aa2,#ff6b8a);color:white}
+    .btn--pink:hover{transform:scale(1.05)}
+    .btn--ghost{background:transparent;border:1px solid rgba(0,0,0,0.08)}
+
+    .img-wrap{width:320px;height:420px;border-radius:18px;overflow:hidden;display:flex;align-items:center;justify-content:center;position:relative;box-shadow:0 4px 20px rgba(0,0,0,0.15);}
+    .img-wrap img{width:100%;height:100%;object-fit:cover;filter:brightness(1.05) saturate(1.1);transition:transform 0.5s ease;}
+    .img-wrap:hover img{transform:scale(1.05)}
+
+    .heart{font-size:24px;color:var(--accent);margin-left:8px;animation:pulse 1.2s infinite ease-in-out}
+
+    @keyframes pulse {
+      0%,100%{transform:scale(1)}
+      50%{transform:scale(1.2)}
+    }
+
+    .big-message{margin-top:24px;font-size:22px;font-weight:700;color:#222;opacity:0;transform:translateY(12px);transition:all 700ms cubic-bezier(.2,.9,.3,1)}
+    .big-message.show{opacity:1;transform:translateY(0)}
+
+    .confetti-piece{position:fixed;width:10px;height:16px;z-index:9999;pointer-events:none;opacity:0.95;border-radius:2px}
+
+    .from{margin-top:18px;font-size:13px;color:var(--muted)}
+
+    @media (max-width:880px){.card{grid-template-columns:1fr;max-width:540px}.img-wrap{width:100%;height:260px}}
+  </style>
+</head>
+<body>
+  <div class="card" role="main">
+    <div class="left">
+      <h1>Hey <span class="cursive" id="sisName">Chickieeee</span><span class="heart">❤</span></h1>
+      <p>I’m really sorry, my cutieee goluuuu moluuuu. I know I hurt you, and I feel it too. You’re my forever partner in crime, my mood changer, and my best sister ever.</p>
+
+      <div class="message">
+        <div id="shortNote">I know sorry might sound small, but my heart means every word. You’re too precious for me to lose even for a moment.</div>
+
+        <div class="big-message" id="bigMessage">Please forgive your Bittuuuuuuu 😢💖 I’ll always make sure your smile never fades again.</div>
+
+        <div class="controls">
+          <button class="btn btn--pink" id="revealBtn">Reveal my true feelings</button>
+          <button class="btn btn--ghost" id="sendHeart">Send Love 💌</button>
+        </div>
+
+        <div class="from">— with endless love, <strong id="fromName">Bittuuuuuuu</strong></div>
+      </div>
+    </div>
+
+    <div class="right">
+      <div class="img-wrap" id="photoWrap">
+        <img id="sisterPhoto" src="WhatsApp Image 2025-10-19 at 01.50.03.jpeg" alt="Sister photo" />
+        <input type="file" id="imgInput" accept="image/*" style="position:absolute;inset:0;opacity:0;cursor:pointer" />
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const revealBtn = document.getElementById('revealBtn');
+    const bigMessage = document.getElementById('bigMessage');
+    const sendHeart = document.getElementById('sendHeart');
+    const imgInput = document.getElementById('imgInput');
+    const sisterPhoto = document.getElementById('sisterPhoto');
+    const photoWrap = document.getElementById('photoWrap');
+
+    revealBtn.addEventListener('click', ()=>{
+      bigMessage.classList.add('show');
+      createConfetti(25);
+      revealBtn.textContent = 'Feeling Revealed 💖';
+      revealBtn.disabled = true;
+    });
+
+    sendHeart.addEventListener('click', ()=> floatHeart());
+
+    imgInput.addEventListener('change', (e)=>{
+      const f = e.target.files[0];
+      if(!f) return;
+      const url = URL.createObjectURL(f);
+      sisterPhoto.src = url;
+    });
+
+    photoWrap.addEventListener('click', ()=> imgInput.click());
+
+    function floatHeart(){
+      const heart = document.createElement('div');
+      heart.textContent = '💖';
+      heart.style.position = 'fixed';
+      heart.style.left = (50 + (Math.random()-0.5)*40) + '%';
+      heart.style.bottom = '10%';
+      heart.style.fontSize = (18 + Math.random()*30) + 'px';
+      heart.style.opacity = 1;
+      heart.style.pointerEvents = 'none';
+      heart.style.transform = 'translateY(0) rotate(0deg)';
+      heart.style.transition = 'transform 1800ms linear, opacity 1800ms linear';
+      document.body.appendChild(heart);
+      requestAnimationFrame(()=>{
+        heart.style.transform = 'translateY(-420px) rotate(' + (Math.random()*60-30) + 'deg)';
+        heart.style.opacity = 0;
+      });
+      setTimeout(()=> heart.remove(),1900);
+    }
+
+    function createConfetti(amount){
+      for(let i=0;i<amount;i++){
+        const el = document.createElement('div');
+        el.className = 'confetti-piece';
+        const colors = ['#FF6B8A','#FFC9E3','#FFD97A','#A7FFEA','#A9D6FF','#FFB3BA'];
+        el.style.background = colors[Math.floor(Math.random()*colors.length)];
+        el.style.left = Math.random()*100 + '%';
+        el.style.top = '-10px';
+        el.style.width = (6 + Math.random()*12) + 'px';
+        el.style.height = (8 + Math.random()*12) + 'px';
+        el.style.transform = 'rotate(' + Math.random()*360 + 'deg)';
+        document.body.appendChild(el);
+        const duration = 1800 + Math.random()*800;
+        el.animate([
+          {transform: 'translateY(0) rotate('+ (Math.random()*360) +'deg)', opacity:1},
+          {transform: 'translateY(' + (600 + Math.random()*200) + 'px) rotate('+ (Math.random()*720) +'deg)', opacity:0}
+        ],{duration:duration, easing:'cubic-bezier(.2,.7,.3,1)'});
+        setTimeout(()=> el.remove(), duration+50);
+      }
+    }
+
+    window.addEventListener('load', ()=> setTimeout(()=> floatHeart(), 800));
+  </script>
+</body>
+</html>
